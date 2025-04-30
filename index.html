@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <!-- Make sure it scales nicely on mobile -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Inter font -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap"
+    rel="stylesheet"
+  />
+
+  <title>No-as-a-Service</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      height: 100vh;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      /* Fill the screen */
+    }
+
+    #reason {
+      text-align: center;
+      font-size: 4vw; /* or 5vw, adjust as needed */
+      margin: 0 10px;
+    }
+
+    @media (min-width: 600px) {
+      /* If displayed on larger screens, bump up size if desired */
+      #reason {
+        font-size: 2em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="reason">Loading...</div>
+
+  <script>
+    async function getReason() {
+      try {
+        const res = await fetch('https://naas.isalman.dev/no');
+        const data = await res.json();
+
+        // Convert reason to lowercase and prepend
+        const reasonText = `tyler says no because ${data.reason.toLowerCase()}`;
+
+        // Display in the #reason element
+        document.getElementById('reason').textContent = reasonText;
+      } catch (err) {
+        console.error(err);
+        document.getElementById('reason').textContent = 
+          'tyler says no because an error happened.';
+      }
+    }
+
+    // Fetch the reason on page load
+    getReason();
+  </script>
+</body>
+</html>
