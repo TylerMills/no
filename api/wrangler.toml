@@ -5,6 +5,14 @@ compatibility_date = "2023-09-04"
 [vars]
 PORT = "8787"
 
+[[assets]]
+binding = "ASSETS"
+bucket = "./assets"
+
+[site]
+bucket = "."
+include = ["reasons.json"]
+
 [[rules]]
 type = "Data"
 globs = ["**/*.json"]
