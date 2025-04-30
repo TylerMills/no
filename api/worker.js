@@ -4,8 +4,8 @@ import reasons from './reasons.json';
 // Create a new router
 const router = Router();
 
-// Random rejection reason endpoint
-router.get('/no', () => {
+// Helper function for consistent response
+const getReasonResponse = () => {
   const reason = reasons[Math.floor(Math.random() * reasons.length)];
   return new Response(
     JSON.stringify({ reason }),
@@ -16,7 +16,11 @@ router.get('/no', () => {
       },
     }
   );
-});
+};
+
+// Serve both the root and /no endpoints
+router.get('/', () => getReasonResponse());
+router.get('/no', () => getReasonResponse());
 
 // Default route
 router.all('*', () => new Response('Not Found', { status: 404 }));
