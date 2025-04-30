@@ -1,0 +1,11 @@
+name = "no-as-service"
+main = "worker.js"
+compatibility_date = "2023-09-04"
+
+[vars]
+PORT = "8787"
+
+[[rules]]
+type = "Data"
+globs = ["**/*.json"]
+fallthrough = true 
